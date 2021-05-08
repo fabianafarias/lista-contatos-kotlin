@@ -1,7 +1,7 @@
 package com.fabianafarias.bootcampkotlin
 
-class Contact {
+data class Contact(
     var name: String,
     var phone: String,
-    var photograph: String,
-}
+    var photograph: String
+)
