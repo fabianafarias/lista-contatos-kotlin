@@ -1,9 +1,8 @@
 package com.fabianafarias.bootcampkotlin
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
-import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -14,17 +13,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.fabianafarias.bootcampkotlin.DetailActivity.Companion.EXTRA_CONTACT
+import com.fabianafarias.bootcampkotlin.R.layout.drawer_menu
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), ClickItemContactListener{
     private val rvList: RecyclerView by lazy {
         findViewById<RecyclerView>(R.id.rv_list)
     }
 
-    private val adapter = ContactAdapter()
+    private val adapter = ContactAdapter(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.drawer_menu)
+        setContentView(drawer_menu)
 
         initDrawer()
         bindView()
@@ -57,8 +58,8 @@ class MainActivity : AppCompatActivity() {
                     "img.png"
                 ),
                 Contact(
-                    "Fabiana Farias",
-                    "(27) 99908-9974",
+                    "Rodrigo Farias",
+                    "(27) 98869-4621",
                     "img.png"
                 )
             )
@@ -87,5 +88,11 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun clickItemContact(contact: Contact) {
+        val intent = Intent(this,DetailActivity::class.java)
+        intent.putExtra(EXTRA_CONTACT,contact)
+        startActivity(intent)
     }
 }
