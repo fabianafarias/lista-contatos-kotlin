@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.drawerlayout.widget.DrawerLayout
 import com.fabianafarias.bootcampkotlin.R.layout.contact_detail
 
 class DetailActivity : AppCompatActivity() {
@@ -23,6 +22,7 @@ class DetailActivity : AppCompatActivity() {
     private fun initToolbar() {
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun getExtras() {
@@ -37,5 +37,10 @@ class DetailActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_CONTACT: String = "EXTRA_CONTACT"
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        finish()
+        return true
     }
 }
